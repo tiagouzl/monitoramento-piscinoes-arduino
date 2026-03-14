@@ -115,9 +115,19 @@ A transição entre estes estados é controlada automaticamente pelo sistema com
 O sistema possui três parâmetros principais que podem ser ajustados conforme as características específicas do reservatório:
 
 ```cpp
-const int NIVEL_SEGURO = 50;    // Nível seguro em cm
-const int NIVEL_ALERTA = 30;    // Nível de alerta em cm  
-const int NIVEL_CRITICO = 15;   // Nível crítico em cm
+// Ajustar para a sua instalação:
+// - RESERVOIR_HEIGHT_CM: altura total do reservatório (sensor até o fundo)
+// - LEVEL_SAFE_CM: margem de operação segura
+// - LEVEL_ALERT_CM: nível onde o sistema entra em vigilância
+// - LEVEL_CRITICAL_CM: nível onde o sistema toma ação imediata
+// - DISTANCE_AVERAGE_SAMPLES: suaviza leituras do sensor (1 = desativado)
+// - ENABLE_SD_LOGGER: grava dados em cartão SD (requer módulo SD conectado)
+constexpr float RESERVOIR_HEIGHT_CM = 100.0f;
+constexpr float LEVEL_SAFE_CM = 50.0f;
+constexpr float LEVEL_ALERT_CM = 30.0f;
+constexpr float LEVEL_CRITICAL_CM = 15.0f;
+constexpr size_t DISTANCE_AVERAGE_SAMPLES = 5;
+constexpr bool ENABLE_SD_LOGGER = false;
 ```
 
 ### 6.2 Calibração do Sensor
@@ -126,7 +136,9 @@ Para calibrar o sensor:
 1. Posicione o sensor na altura máxima do reservatório
 2. Meça a distância até o fundo do reservatório (reservatório vazio)
 3. Meça a distância até o nível de água máximo desejado
-4. Ajuste as constantes NIVEL_SEGURO, NIVEL_ALERTA e NIVEL_CRITICO no código
+4. Ajuste as constantes NIVEL_SEGURO, NIVEL_ALERTA e NIVEL_CRITICO no código (ou use o console serial para alterar em runtime)
+
+> As configurações aplicadas via console são salvas na EEPROM e são mantidas após reinicialização.
 
 ## 7. Expansões Propostas
 

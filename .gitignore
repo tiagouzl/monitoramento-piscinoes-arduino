@@ -1,0 +1,22 @@
+# Build outputs (Arduino IDE)
+*.hex
+*.bin
+*.elf
+*.eep
+*.map
+*.d
+*.log
+*.lst
+
+# PlatformIO
+.pio/
+.pioenvs/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Node (if used)
+node_modules/
